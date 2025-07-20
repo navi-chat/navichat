@@ -10,15 +10,13 @@ import {
     FormControl,
     FormField,
     FormItem,
-    FormLabel,
     FormMessage,
 } from "@/components/ui/form"
 
 import { Input } from "@/components/ui/input"
 
-import { ChevronRight, Loader, Loader2, MinusCircle, PlusCircleIcon, X } from "lucide-react"
-import { redirect, useParams, usePathname, useRouter } from "next/navigation"
-import { useState } from "react"
+import { Loader, MinusCircle, PlusCircleIcon } from "lucide-react"
+import { useParams, } from "next/navigation"
 import { createFaq } from "@/lib/actions/faqs.actions"
 import { Textarea } from "./textarea"
 import { useSources } from "@/app/(root)/editor/chat-bots/[bot_id]/sources/layout"
@@ -35,8 +33,6 @@ const formSchema = z.object({
 const CreateFAQSource = () => {
     const params = useParams()
     const bot_id = params.bot_id?.toString() || ""
-    const router = useRouter()
-    const pathname = usePathname()
 
     const { sourcesRefetch } = useSources()
     const { refetch } = useFAQSource()

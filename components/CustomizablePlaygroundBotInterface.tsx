@@ -2,20 +2,10 @@
 import LoadingThreeDotsPulse from '@/components/Dots'
 import { Button } from '@/components/ui/button'
 import { getBot } from '@/lib/actions/bots.actions'
-import { getCompanyById } from '@/lib/actions/companies.actions'
-import { getContactById, getContacts, getContactsList } from '@/lib/actions/contacts.actions'
-import { getFAQsList } from '@/lib/actions/faqs.actions'
-import { getProductsList } from '@/lib/actions/products.actions'
-import { getTextsList } from '@/lib/actions/texts.actions'
-import { runAgent } from '@/lib/chatService'
-import { CalculateEmbedding } from '@/lib/embeddingService'
-// import { getMessage } from '@/lib/llmService'
-import { Bot, ChatInterfaceType, CustomChatInterfaceType } from '@/lib/types'
-import { AIMessage, BaseMessage, HumanMessage, SystemMessage } from '@langchain/core/messages'
+import { Bot, CustomChatInterfaceType } from '@/lib/types'
 import { SendIcon, XIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 
 export interface Message {
@@ -167,14 +157,6 @@ const CustomizablePlaygroundBotInterface = ({ bot_id, chatInterface }: { bot_id:
             }
         };
     }, []);
-
-    // Dynamic height calculation for iframe
-    const getContainerHeight = () => {
-        if (isKeyboardOpen) {
-            return `${viewportHeight - 56}px`; // 56px for header
-        }
-        return '100vh';
-    };
 
     const getMessagesHeight = () => {
         if (isKeyboardOpen) {

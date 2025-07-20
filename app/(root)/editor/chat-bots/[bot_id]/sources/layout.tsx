@@ -1,22 +1,9 @@
 'use client'
 import ChatBotsSidebar from '@/components/ChatBotsSidebar'
-import { Box, ContactRound, Loader, MessageCircleQuestion, TextIcon } from 'lucide-react'
+import { Box, ContactRound, MessageCircleQuestion, TextIcon } from 'lucide-react'
 import { useParams } from 'next/navigation'
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
-import { Checkbox } from '@/components/ui/checkbox'
 import { getTextsLength, updateTexts } from '@/lib/actions/texts.actions'
-import { Button } from '@/components/ui/button'
-import LoadingThreeDotsPulse from '@/components/Dots'
-import { getSourceDataList } from '@/lib/retrainBot'
-import { createData } from '@/lib/actions/data.actions'
 import { getFAQsLength } from '@/lib/actions/faqs.actions'
 import { Skeleton } from '@/components/ui/skeleton'
 import { getProductsLength } from '@/lib/actions/products.actions'

@@ -18,10 +18,8 @@ import { Input } from "@/components/ui/input"
 import { Button } from './ui/button'
 import { Textarea } from './ui/textarea'
 import { useParams } from 'next/navigation'
-import { createText } from '@/lib/actions/texts.actions'
 import { toast } from 'sonner'
-import { useTextSource } from '@/app/(root)/editor/chat-bots/[bot_id]/sources/page'
-import { Loader, Loader2, Upload, X } from 'lucide-react'
+import { Loader, Upload, X } from 'lucide-react'
 import { useSources } from '@/app/(root)/editor/chat-bots/[bot_id]/sources/layout'
 import { useProductSource } from '@/app/(root)/editor/chat-bots/[bot_id]/sources/products/page'
 import currencyCodes from "currency-codes"
@@ -117,7 +115,7 @@ const CreateProductSource = () => {
                 <FormField
                     control={form.control}
                     name="images"
-                    render={({ field }) => (
+                    render={() => (
                         <FormItem>
                             <FormLabel>Image (Optional)</FormLabel>
                             <FormControl>

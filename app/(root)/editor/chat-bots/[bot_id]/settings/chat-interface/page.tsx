@@ -1,14 +1,11 @@
 'use client'
-import EmbedPage from '@/app/chat-interface-embed/page'
 import CustomizablePlaygroundBotInterface from '@/components/CustomizablePlaygroundBotInterface'
-import PlaygroundBotInterface from '@/components/PlaygroundBotInterface'
 import { getChatInterface } from '@/lib/actions/chat_interface.actions'
 import { ChatInterfaceType, CustomChatInterfaceType } from '@/lib/types'
-import { Loader, MessageCircle } from 'lucide-react'
+import { Loader } from 'lucide-react'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import { toast } from 'sonner'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -17,7 +14,6 @@ import { HexAlphaColorPicker } from "react-colorful"
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -61,7 +57,7 @@ const ChatInterface = () => {
         },
     })
 
-    async function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit() {
 
     }
 

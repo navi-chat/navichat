@@ -1,7 +1,5 @@
 'use client'
-import CreateTextSource from '@/components/CreateTextSource'
-import { getTexts } from '@/lib/actions/texts.actions'
-import { ContactType, FAQ, ProductType, TextType } from '@/lib/types'
+import { ContactType } from '@/lib/types'
 import { useParams } from 'next/navigation'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { toast } from 'sonner'
@@ -9,26 +7,13 @@ import {
     Table,
     TableBody,
     TableCell,
-    TableHead,
-    TableHeader,
     TableRow,
 } from "@/components/ui/table"
 import { Checkbox } from '@/components/ui/checkbox'
 
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-import { Box, ContactRound, Ellipsis, MessageCircleQuestion, TextIcon } from 'lucide-react'
+import { ContactRound, Ellipsis } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import CreateFAQSource from '@/components/ui/CreateFAQSource'
-import { getFAQs } from '@/lib/actions/faqs.actions'
-import CreateProductSource from '@/components/CreateProductSource'
-import { getProducts } from '@/lib/actions/products.actions'
-import CreateContactSource, { contact_types } from '@/components/CreateContactSource'
+import CreateContactSource from '@/components/CreateContactSource'
 import { getContacts } from '@/lib/actions/contacts.actions'
 
 const contactsSourceContext = createContext<{ refetch: () => void } | undefined>(undefined)

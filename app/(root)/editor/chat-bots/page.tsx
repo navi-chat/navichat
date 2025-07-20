@@ -1,30 +1,24 @@
 'use client'
 import BotViewItem from '@/components/BotViewItem'
 import Header from '@/components/Header'
-import { Button } from '@/components/ui/button'
 import { getBots } from '@/lib/actions/bots.actions'
 import { Bot } from '@/lib/types'
-import { Loader2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
 const ChatBots = () => {
   const [bots, setbots] = useState<Bot[]>()
-  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const initialCall = async () => {
-      setLoading(true)
       const res = await getBots()
       if (res.error) {
         toast.error(res.error)
       } else {
         setbots(res.data)
       }
-      setLoading(false)
     }
     initialCall()
   }, [])

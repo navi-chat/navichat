@@ -3,7 +3,6 @@ import Header from '@/components/Header'
 import { Button } from '@/components/ui/button'
 import { getCompany } from '@/lib/actions/companies.actions'
 import { Company } from '@/lib/types'
-import { Loader2 } from 'lucide-react'
 import { redirect } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import {Skeleton} from "@/components/ui/skeleton"

@@ -50,7 +50,7 @@ export const getCompanyById = async ({ id }: { id: string }) => {
 export const descreaseMessageCredits = async ({ id }: { id: string }) => {
     const supabase = createSupabaseClient()
 
-    const { data, error } = await supabase
+    const { data } = await supabase
         .from("companies")
         .select("id, messageCredits")
         .eq("id", id)

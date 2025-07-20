@@ -1,4 +1,5 @@
 'use server'
+/* eslint-disable */
 import { Annotation, END, MemorySaver, MessagesAnnotation, START, StateGraph } from "@langchain/langgraph"
 import { llm } from "./llmService"
 import { v4 as uuidv4 } from "uuid"
@@ -7,9 +8,9 @@ import { z } from "zod"
 import { ToolNode } from "@langchain/langgraph/prebuilt"
 import { AIMessage, BaseMessage, HumanMessage, SystemMessage } from "@langchain/core/messages"
 import { Message } from "@/components/PlaygroundBotInterface"
-import { getContactById, getContactsList, matchContacts } from "./actions/contacts.actions"
-import { getTextById, getTextsList, matchTexts } from "./actions/texts.actions"
-import { getFAQById, getFAQsList, matchFAQs } from "./actions/faqs.actions"
+import { getContactsList, matchContacts } from "./actions/contacts.actions"
+import { matchTexts } from "./actions/texts.actions"
+import { matchFAQs } from "./actions/faqs.actions"
 import { getProductById, getProductsList, matchProducts } from "./actions/products.actions"
 import { embeddingsModel } from "./embeddingModel"
 import { textSplitter } from "./textSplitterModel"
@@ -17,6 +18,7 @@ import { cosineSimilarity } from "./cosine"
 
 llm.maxOutputTokens = 500
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const AgentState = Annotation.Root({
     messages: Annotation<BaseMessage[]>({
         reducer: (x, y) => x.concat(y)
@@ -33,12 +35,15 @@ const dataTool = tool(async ({ query, bot_id }: { query: string, bot_id: string 
     const faqsRes = await matchFAQs({ bot_id, embedding: query_embedding })
     const productsRes = await matchProducts({ bot_id, embedding: query_embedding })
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     faqsRes.data.forEach((faq: any) => {
         scoredResults.push({
             text: `Question: ${faq.question}, Answer: ${faq.answer}`,
             score: faq.score
         })
     })
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     for (const text of textsRes.data) {
         const chunks = await textSplitter.splitText(text.text);
         const scoredChunks: { chunk: string; score: number }[] = [];
@@ -60,6 +65,7 @@ const dataTool = tool(async ({ query, bot_id }: { query: string, bot_id: string 
         });
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     productsRes.data.forEach((product: any) => {
         const priceStr = product.price !== null ? ` Price: ${product.price} ${product.currency}` : "";
         scoredResults.push({
@@ -128,7 +134,7 @@ const productTool = tool(async ({ bot_id, id, query }: { bot_id: string, query?:
         };
     } else if (id) {
         const res = await getProductById({ id })
-        if(res.data){
+        if (res.data) {
             const priceStr = res.data.price !== null ? ` Price: ${res.data.price} ${res.data.currency}` : "";
             const result = {
                 text: `Title: ${res.data.title}, Description: ${res.data.description}${priceStr} ${res.data.image_urls.length > 0 && `Images: ${res.data.image_urls.join(',')}`}`,

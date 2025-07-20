@@ -16,7 +16,7 @@ import {
 
 import { Input } from "@/components/ui/input"
 
-import { ChevronRight, Loader, Loader2 } from "lucide-react"
+import { ChevronRight, Loader } from "lucide-react"
 import { createBot } from "@/lib/actions/bots.actions"
 import { toast } from "sonner"
 import { redirect } from "next/navigation"
@@ -59,7 +59,7 @@ const CreateBotForm = () => {
         if (res.error) {
             toast.error(res.error)
         } else {
-            const chatInterfaceRes = await createChatInterface({ bot_id: res.data.id })
+            await createChatInterface({ bot_id: res.data.id })
             redirect(`/editor/chat-bots/${res.data.id}/sources`)
         }
         setLoading(false)

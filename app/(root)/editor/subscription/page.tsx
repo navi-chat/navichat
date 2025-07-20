@@ -4,8 +4,6 @@ import { Button } from '@/components/ui/button'
 import { Check, Minus, Plus } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { createOrder, createSubscription, verifySignature } from '@/lib/actions/subscriptions.actions'
-import { redirect } from 'next/navigation'
-import Razorpay from 'razorpay'
 import { Company } from '@/lib/types'
 import { getCompany, updatePlan } from '@/lib/actions/companies.actions'
 import { useUser } from '@clerk/nextjs'
@@ -16,11 +14,10 @@ const Subscription = () => {
     const user = useUser().user
     const [billing, setBilling] = useState<"monthly" | "yearly" | "one-time-purchase">("monthly")
     const [company, setCompany] = useState<Company>()
-    const [amount, setAmount] = useState(6)
     const [noOfMonthsBasic, setNoOfMonthsBasic] = useState(1)
     const [noOfMonthsPro, setNoOfMonthsPro] = useState(1)
 
-    const paymentOptions = ({ key, id, handler }: { key: string, id: string, handler: (response: any) => void }) => {
+    const paymentOptions = ({ key, id, handler }: { key: string, id: string, handler: (response: {razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string}) => void }) => {
         const options = {
             key: key,
             subscription_id: id,
@@ -97,9 +94,9 @@ const Subscription = () => {
                                     if (billing === "monthly") {
                                         const res = await createSubscription({ plan_id: "plan_QvBdmRQL6Al1mU", total_count: 12 })
                                         const options = paymentOptions({
-                                            key: res.razorpay_key, id: res.subscription_id, handler: async (response: any) => {
-                                                const signature = await verifySignature({ order_id: response.razorpay_order_id, payment_id: response.razorpay_payment_id, signature: response.razorpay_signature })
-                                                const resUpdatePlan = await updatePlan({
+                                            key: res.razorpay_key, id: res.subscription_id, handler: async (response: {razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string}) => {
+                                                await verifySignature({ order_id: response.razorpay_order_id, payment_id: response.razorpay_payment_id, signature: response.razorpay_signature })
+                                                await updatePlan({
                                                     plan: "basic",
                                                     messageCredits: 20000,
                                                     validTill: new Date(Date.now() + (30 * 24 * 60 * 60 * 1000)),
@@ -113,9 +110,9 @@ const Subscription = () => {
                                     } else if (billing === "yearly") {
                                         const res = await createSubscription({ plan_id: "plan_QvBeHw7hr7hq4d", total_count: 2 })
                                         const options = paymentOptions({
-                                            key: res.razorpay_key, id: res.subscription_id, handler: async (response: any) => {
-                                                const signature = await verifySignature({ order_id: response.razorpay_order_id, payment_id: response.razorpay_payment_id, signature: response.razorpay_signature })
-                                                const resUpdatePlan = await updatePlan({
+                                            key: res.razorpay_key, id: res.subscription_id, handler: async (response: {razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string}) => {
+                                                await verifySignature({ order_id: response.razorpay_order_id, payment_id: response.razorpay_payment_id, signature: response.razorpay_signature })
+                                                await updatePlan({
                                                     plan: "basic",
                                                     messageCredits: 20000,
                                                     validTill: new Date(Date.now() + (365 * 24 * 60 * 60 * 1000)),
@@ -137,11 +134,11 @@ const Subscription = () => {
                                             order_id: res.order_id,
                                             name: "NaviChat",
                                             description: `One-time purchase for ${noOfMonthsBasic} month(s)`,
-                                            handler: async function (response: any) {
-                                                const signature = await verifySignature({ order_id: response.razorpay_order_id, payment_id: response.razorpay_payment_id, signature: response.razorpay_signature })
+                                            handler: async function (response: {razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string}) {
+                                                await verifySignature({ order_id: response.razorpay_order_id, payment_id: response.razorpay_payment_id, signature: response.razorpay_signature })
                                                 const initialDate = company?.plan === "basic" ? new Date(company.validTill) : new Date(Date.now());
 
-                                                const resUpdatePlan = await updatePlan({
+                                                await updatePlan({
                                                     plan: "basic",
                                                     messageCredits: 20000 * noOfMonthsBasic,
                                                     validTill: new Date(initialDate.getTime() + (noOfMonthsBasic * 30 * 24 * 60 * 60 * 1000)), // ← FIXED
@@ -190,9 +187,9 @@ const Subscription = () => {
                                     if (billing === "monthly") {
                                         const res = await createSubscription({ plan_id: "plan_QvBfBcBGfwxIiL", total_count: 12 })
                                         const options = paymentOptions({
-                                            key: res.razorpay_key, id: res.subscription_id, handler: async (response: any) => {
-                                                const signature = await verifySignature({ order_id: response.razorpay_order_id, payment_id: response.razorpay_payment_id, signature: response.razorpay_signature })
-                                                const resUpdatePlan = await updatePlan({
+                                            key: res.razorpay_key, id: res.subscription_id, handler: async (response: {razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string}) => {
+                                                await verifySignature({ order_id: response.razorpay_order_id, payment_id: response.razorpay_payment_id, signature: response.razorpay_signature })
+                                                await updatePlan({
                                                     plan: "pro",
                                                     messageCredits: 80000,
                                                     validTill: new Date(Date.now() + (30 * 24 * 60 * 60 * 1000)),
@@ -206,9 +203,9 @@ const Subscription = () => {
                                     } else if (billing === "yearly") {
                                         const res = await createSubscription({ plan_id: "plan_QvBehwp4NnPRVk", total_count: 2 })
                                         const options = paymentOptions({
-                                            key: res.razorpay_key, id: res.subscription_id, handler: async (response: any) => {
-                                                const signature = await verifySignature({ order_id: response.razorpay_order_id, payment_id: response.razorpay_payment_id, signature: response.razorpay_signature })
-                                                const resUpdatePlan = await updatePlan({
+                                            key: res.razorpay_key, id: res.subscription_id, handler: async (response: {razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string}) => {
+                                                await verifySignature({ order_id: response.razorpay_order_id, payment_id: response.razorpay_payment_id, signature: response.razorpay_signature })
+                                                await updatePlan({
                                                     plan: "pro",
                                                     messageCredits: 80000,
                                                     validTill: new Date(Date.now() + (365 * 24 * 60 * 60 * 1000)),
@@ -230,11 +227,11 @@ const Subscription = () => {
                                             order_id: res.order_id,
                                             name: "NaviChat",
                                             description: `One-time purchase for ${noOfMonthsPro} month(s)`,
-                                            handler: async function (response: any) {
-                                                const signature = await verifySignature({ order_id: response.razorpay_order_id, payment_id: response.razorpay_payment_id, signature: response.razorpay_signature })
+                                            handler: async function (response: {razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string}) {
+                                                await verifySignature({ order_id: response.razorpay_order_id, payment_id: response.razorpay_payment_id, signature: response.razorpay_signature })
                                                 const initialDate = company?.plan === "pro" ? new Date(company.validTill) : new Date(Date.now());
 
-                                                const resUpdatePlan = await updatePlan({
+                                                await updatePlan({
                                                     plan: "pro",
                                                     messageCredits: 80000 * noOfMonthsPro,
                                                     validTill: new Date(initialDate.getTime() + (noOfMonthsPro * 30 * 24 * 60 * 60 * 1000)), // ← FIXED
@@ -254,7 +251,6 @@ const Subscription = () => {
                                         const razorpay = new (window as any).Razorpay(options);
                                         razorpay.open();
                                     }
-
                                 }}>Upgrade Plan</Button>
                             )}
                         </div>

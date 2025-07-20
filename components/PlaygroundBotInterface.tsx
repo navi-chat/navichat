@@ -3,19 +3,10 @@ import LoadingThreeDotsPulse from '@/components/Dots'
 import { Button } from '@/components/ui/button'
 import { getBot } from '@/lib/actions/bots.actions'
 import { descreaseMessageCredits, getCompanyById } from '@/lib/actions/companies.actions'
-import { getContactById, getContacts, getContactsList } from '@/lib/actions/contacts.actions'
-import { getFAQsList } from '@/lib/actions/faqs.actions'
-import { getProductsList } from '@/lib/actions/products.actions'
-import { getTextsList } from '@/lib/actions/texts.actions'
-import { runAgent } from '@/lib/chatService'
-import { CalculateEmbedding } from '@/lib/embeddingService'
-// import { getMessage } from '@/lib/llmService'
-import { Bot, ChatInterfaceType } from '@/lib/types'
-import { AIMessage, BaseMessage, HumanMessage, SystemMessage } from '@langchain/core/messages'
+import { Bot } from '@/lib/types'
 import { SendIcon, XIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 
 export interface Message {
@@ -82,7 +73,7 @@ const PlaygroundBotInterface = ({ bot_id }: { bot_id: string }) => {
                 setMessages(data.messages)
                 setMessageLoading(false)
                 await descreaseMessageCredits({ id: bot.company })
-            } catch (error) {
+            } catch {
                 
             }
         }
@@ -191,14 +182,6 @@ const PlaygroundBotInterface = ({ bot_id }: { bot_id: string }) => {
             }
         };
     }, []);
-
-    // Dynamic height calculation for iframe
-    const getContainerHeight = () => {
-        if (isKeyboardOpen) {
-            return `${viewportHeight - 56}px`; // 56px for header
-        }
-        return '100vh';
-    };
 
     const getMessagesHeight = () => {
         if (isKeyboardOpen) {

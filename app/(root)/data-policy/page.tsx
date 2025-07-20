@@ -45,7 +45,7 @@ const DataPolicy = () => {
                             <li className='flex'><Dot />Generating responses using AI models</li>
                             <li className='flex'><Dot />Improving chatbot accuracy and experience</li>
                             <li className='flex'><Dot />Debugging errors and analyzing usage patterns</li>
-                            <li className='flex'><Dot />Helping the business you're interacting with assist you better</li>
+                            <li className='flex'><Dot />Helping the business you&apos;re interacting with assist you better</li>
                         </ul>
                     </div>
                     <div className='space-y-2'>
@@ -73,7 +73,7 @@ const DataPolicy = () => {
                     <div className='space-y-2'>
                         <h2 className='text-2xl font-bold'>Data Retention</h2>
                         <p>
-                            Your chat data is stored for as long as necessary to operate and improve the service or as required by the business you're chatting with.
+                            Your chat data is stored for as long as necessary to operate and improve the service or as required by the business you&apos;re chatting with.
                         </p>
                     </div>
                     <div className='space-y-2'>

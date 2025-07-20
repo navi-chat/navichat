@@ -8,7 +8,6 @@ import { z } from "zod"
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -21,7 +20,7 @@ import { useParams } from 'next/navigation'
 import { createText } from '@/lib/actions/texts.actions'
 import { toast } from 'sonner'
 import { useTextSource } from '@/app/(root)/editor/chat-bots/[bot_id]/sources/page'
-import { Loader, Loader2 } from 'lucide-react'
+import { Loader } from 'lucide-react'
 import { useSources } from '@/app/(root)/editor/chat-bots/[bot_id]/sources/layout'
 import { embeddingsModel } from '@/lib/embeddingModel'
 

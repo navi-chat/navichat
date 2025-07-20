@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button'
 import { getBot } from '@/lib/actions/bots.actions'
 import { Bot } from '@/lib/types'
-import { CheckIcon, Clipboard, ClipboardIcon } from 'lucide-react'
+import { CheckIcon, ClipboardIcon } from 'lucide-react'
 import { JetBrains_Mono } from 'next/font/google'
 import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'

@@ -8,7 +8,6 @@ import { z } from "zod"
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -16,17 +15,12 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from './ui/button'
-import { Textarea } from './ui/textarea'
 import { useParams } from 'next/navigation'
-import { createText } from '@/lib/actions/texts.actions'
 import { toast } from 'sonner'
-import { Loader, Loader2, Upload, X } from 'lucide-react'
+import { Loader } from 'lucide-react'
 import { useSources } from '@/app/(root)/editor/chat-bots/[bot_id]/sources/layout'
 import currencyCodes from "currency-codes"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
-import Image from 'next/image'
-import { uploadImageFile } from '@/lib/actions/images.actions'
-import { createProduct } from '@/lib/actions/products.actions'
 import { useContactSource } from '@/app/(root)/editor/chat-bots/[bot_id]/sources/contacts/page'
 import { createContact } from '@/lib/actions/contacts.actions'
 import { embeddingsModel } from '@/lib/embeddingModel'
@@ -98,7 +92,6 @@ const CreateContactSource = () => {
     const bot_id = params.bot_id?.toString() || ""
     const { refetch } = useContactSource()
     const { sourcesRefetch } = useSources()
-    const [imageFile, setImageFile] = useState<File>()
 
     // 2. Define a submit handler.
     async function onSubmit(values: z.infer<typeof formSchema>) {

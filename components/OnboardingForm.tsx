@@ -16,7 +16,7 @@ import {
 
 import { Input } from "@/components/ui/input"
 
-import { ChevronRight, Loader, Loader2, X } from "lucide-react"
+import { ChevronRight, Loader, X } from "lucide-react"
 import { createCompany } from "@/lib/actions/companies.actions"
 import { toast } from "sonner"
 import { redirect } from "next/navigation"
