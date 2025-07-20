@@ -1,5 +1,5 @@
 'use client'
-import React, { HTMLInputTypeAttribute, useState } from 'react'
+import React, { HTMLInputTypeAttribute } from 'react'
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -85,8 +85,6 @@ const CreateContactSource = () => {
             contact: ""
         },
     })
-
-    const currencies = currencyCodes.data
 
     const params = useParams()
     const bot_id = params.bot_id?.toString() || ""

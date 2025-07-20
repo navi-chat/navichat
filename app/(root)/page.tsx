@@ -2,7 +2,7 @@
 import Header from '@/components/Header'
 import { Button } from '@/components/ui/button'
 import { useUser } from '@clerk/nextjs'
-import { ChevronRight, Play } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import { redirect } from 'next/navigation'
 import React from 'react'
 

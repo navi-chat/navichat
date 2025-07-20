@@ -1,5 +1,4 @@
 'use client'
-import LoadingThreeDotsPulse from '@/components/Dots'
 import { Button } from '@/components/ui/button'
 import { getBot } from '@/lib/actions/bots.actions'
 import { Bot, CustomChatInterfaceType } from '@/lib/types'
