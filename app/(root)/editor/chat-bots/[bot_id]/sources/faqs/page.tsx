@@ -1,0 +1,126 @@
+'use client'
+import CreateTextSource from '@/components/CreateTextSource'
+import { getTexts } from '@/lib/actions/texts.actions'
+import { FAQ, TextType } from '@/lib/types'
+import { useParams } from 'next/navigation'
+import React, { createContext, useContext, useEffect, useState } from 'react'
+import { toast } from 'sonner'
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table"
+import { Checkbox } from '@/components/ui/checkbox'
+
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+import { Ellipsis, MessageCircleQuestion, TextIcon } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import CreateFAQSource from '@/components/ui/CreateFAQSource'
+import { getFAQs } from '@/lib/actions/faqs.actions'
+import { Separator } from '@/components/ui/separator'
+
+const faqSourceContext = createContext<{ refetch: () => void } | undefined>(undefined)
+
+export const useFAQSource = () => {
+    const context = useContext(faqSourceContext)
+    if (!context) throw new Error('useFAQSource must be used within TextSourceProvider')
+    return context
+}
+
+const FAQs = () => {
+    const [faqs, setFaqs] = useState<FAQ[]>()
+    const [selectedFAQs, setSelectedFAQs] = useState<string[]>([])
+
+    const params = useParams()
+    const bot_id = params.bot_id?.toString() || ""
+
+    const refetch = async () => {
+        const res = await getFAQs({ bot_id: bot_id })
+        if (res.error) {
+            toast(res.error)
+        }
+        setFaqs(res.data)
+    }
+    useEffect(() => {
+        refetch()
+    }, [bot_id])
+    return (
+        <faqSourceContext.Provider value={{ refetch }}>
+            <div className='w-full'>
+                <div className='flex flex-col lg:flex-row gap-5'>
+                    <div className='w-full'>
+                        <div className='border rounded-lg p-5 w-full space-y-2'>
+                            <h2 className='text-lg font-bold'>FAQs</h2>
+                            <p className='text-muted-foreground text-sm'>Add Frequently Asked Questions to train your AI Chatbot.</p>
+                            {/* <CreateTextSource /> */}
+                            <CreateFAQSource />
+                        </div>
+                        <div className='border rounded-lg p-5 w-full mt-5 mb-20'>
+                            <h2 className='text-lg font-bold'>FAQs Sources</h2>
+                            <div className='mt-2'>
+                                <div className='px-2 py-3 flex items-center justify-between'>
+                                    <div className='text-sm flex gap-2 items-center'><Checkbox onCheckedChange={(checked) => {
+                                        return checked ? setSelectedFAQs(faqs?.map((faq) => faq.id) ?? []) : setSelectedFAQs([])
+                                    }} checked={selectedFAQs.length === faqs?.length} /> Select All</div>
+                                    <div>
+                                        {/* <Select>
+                                            <SelectTrigger className="w-[180px]">
+                                                <SelectValue placeholder="Theme" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="light">Light</SelectItem>
+                                                <SelectItem value="dark">Dark</SelectItem>
+                                                <SelectItem value="system">System</SelectItem>
+                                            </SelectContent>
+                                        </Select> */}
+                                    </div>
+                                </div>
+                                <Table className='border-t'>
+                                    <TableBody>
+                                        {faqs?.map((faq) => (
+                                            <TableRow key={faq.id} className='hover:bg-background'>
+                                                <TableCell><Checkbox checked={selectedFAQs.includes(faq.id)} onCheckedChange={(checked) => {
+                                                    return checked ? setSelectedFAQs((prev) => [...prev, faq.id]) : setSelectedFAQs((prev) => prev.filter((item) => item !== faq.id))
+                                                }} /></TableCell>
+                                                <TableCell className='pl-5'>
+                                                    <div className='bg-accent rounded-full size-9 p-2 flex items-center justify-center'>
+                                                        <MessageCircleQuestion className='text-muted-foreground' />
+                                                    </div>
+                                                </TableCell>
+                                                <TableCell className='w-full font-medium'><span>{faq.question}</span></TableCell>
+                                                <TableCell>
+                                                    <Button variant={"ghost"}>
+                                                        <Ellipsis />
+                                                    </Button>
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </div>
+                            {selectedFAQs.length > 0 && (
+                                <>
+                                    <Separator className=' transition-all' />
+                                    <div className='w-full flex justify-center mt-5 transition-all'>
+                                        <Button variant={"destructive"}>Delete Selected</Button>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </faqSourceContext.Provider>
+    )
+}
+
+export default FAQs
