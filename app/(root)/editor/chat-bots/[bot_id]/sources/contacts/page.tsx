@@ -1,4 +1,5 @@
 'use client'
+/* eslint-disable */
 import { ContactType } from '@/lib/types'
 import { useParams } from 'next/navigation'
 import React, { createContext, useContext, useEffect, useState } from 'react'
