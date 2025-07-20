@@ -19,14 +19,13 @@ import { Textarea } from './ui/textarea'
 import { useParams } from 'next/navigation'
 import { toast } from 'sonner'
 import { Loader, Upload, X } from 'lucide-react'
-import { useSources } from '@/app/(root)/editor/chat-bots/[bot_id]/sources/layout'
 import currencyCodes from "currency-codes"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 import Image from 'next/image'
 import { uploadImageFile } from '@/lib/actions/images.actions'
 import { createProduct } from '@/lib/actions/products.actions'
 import { embeddingsModel } from '@/lib/embeddingModel'
-import { useProductSource } from '@/hooks/useSource'
+import { useProductSource, useSources } from '@/hooks/useSource'
 
 
 const formSchema = z.object({

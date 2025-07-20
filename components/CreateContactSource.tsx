@@ -18,11 +18,10 @@ import { Button } from './ui/button'
 import { useParams } from 'next/navigation'
 import { toast } from 'sonner'
 import { Loader } from 'lucide-react'
-import { useSources } from '@/app/(root)/editor/chat-bots/[bot_id]/sources/layout'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 import { createContact } from '@/lib/actions/contacts.actions'
 import { embeddingsModel } from '@/lib/embeddingModel'
-import { useContactSource } from '@/hooks/useSource'
+import { useContactSource, useSources } from '@/hooks/useSource'
 
 export const contact_types = [
     {

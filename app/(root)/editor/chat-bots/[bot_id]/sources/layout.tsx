@@ -2,7 +2,7 @@
 import ChatBotsSidebar from '@/components/ChatBotsSidebar'
 import { Box, ContactRound, MessageCircleQuestion, TextIcon } from 'lucide-react'
 import { useParams } from 'next/navigation'
-import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import { getTextsLength } from '@/lib/actions/texts.actions'
 import { getFAQsLength } from '@/lib/actions/faqs.actions'
 import { Skeleton } from '@/components/ui/skeleton'

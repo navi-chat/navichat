@@ -19,9 +19,8 @@ import { Loader, MinusCircle, PlusCircleIcon } from "lucide-react"
 import { useParams, } from "next/navigation"
 import { createFaq } from "@/lib/actions/faqs.actions"
 import { Textarea } from "./textarea"
-import { useSources } from "@/app/(root)/editor/chat-bots/[bot_id]/sources/layout"
 import { embeddingsModel } from "@/lib/embeddingModel"
-import { useFAQSource } from "@/hooks/useSource"
+import { useFAQSource, useSources } from "@/hooks/useSource"
 
 const formSchema = z.object({
     faqs: z.array(z.object({
