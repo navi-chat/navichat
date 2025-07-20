@@ -18,7 +18,6 @@ const CustomizablePlaygroundBotInterface = ({ bot_id, chatInterface }: { bot_id:
     const [bot, setBot] = useState<Bot>()
     const [currentMessage, setCurrentMessage] = useState("")
     const [messages, setMessages] = useState<Message[]>([])
-    const [messageLoading, setMessageLoading] = useState(false)
 
     const endOfMessagesRef = useRef<HTMLDivElement>(null)
     const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -208,11 +207,6 @@ const CustomizablePlaygroundBotInterface = ({ bot_id, chatInterface }: { bot_id:
                             </div>
                         )
                     })}
-                    {messageLoading && (
-                        <div className='p-4 px-4 rounded-3xl w-min bg-foreground/10 text-foreground rounded-tl-sm'>
-                            <div className='text-wrap break-words'><LoadingThreeDotsPulse /></div>
-                        </div>
-                    )}
 
                     {/* 👇 Scroll target */}
                     <div ref={endOfMessagesRef} />

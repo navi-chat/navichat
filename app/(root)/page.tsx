@@ -29,7 +29,7 @@ const Root = () => {
           </div>
           <div className='flex flex-col md:flex-row items-center gap-3 md:gap-5 mt-6 md:mt-0 w-full justify-center'>
             <Button className='h-12 px-8 w-full md:w-48' onClick={() => redirect('/editor')}><p>Get Your ChatBot</p> <ChevronRight /></Button>
-            <Button className='h-12 px-8 w-full md:w-48' variant={"outline"}><p>Watch Demo</p> <Play className='size-3.5' /></Button>
+            {/* <Button className='h-12 px-8 w-full md:w-48' variant={"outline"}><p>Watch Demo</p> <Play className='size-3.5' /></Button> */}
           </div>
         </div>
         <footer className='w-full flex flex-col sm:flex-row justify-between items-center gap-5 bg-foreground/50 p-4 md:p-5 mt-auto bottom-0'>
