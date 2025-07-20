@@ -8,14 +8,7 @@ import { getFAQsLength } from '@/lib/actions/faqs.actions'
 import { Skeleton } from '@/components/ui/skeleton'
 import { getProductsLength } from '@/lib/actions/products.actions'
 import { getContactsLength } from '@/lib/actions/contacts.actions'
-
-const sourcesContext = createContext<{ sourcesRefetch: () => void; } | undefined>(undefined)
-
-export const useSources = () => {
-  const context = useContext(sourcesContext)
-  if (!context) throw new Error('useSources must be used within SourcesProvider')
-  return context
-}
+import { sourcesContext } from '@/hooks/useSource'
 
 const SourcesLayout = ({ children }: { children: ReactNode }) => {
   const params = useParams()

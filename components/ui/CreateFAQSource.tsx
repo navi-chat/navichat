@@ -20,8 +20,8 @@ import { useParams, } from "next/navigation"
 import { createFaq } from "@/lib/actions/faqs.actions"
 import { Textarea } from "./textarea"
 import { useSources } from "@/app/(root)/editor/chat-bots/[bot_id]/sources/layout"
-import { useFAQSource } from "@/app/(root)/editor/chat-bots/[bot_id]/sources/faqs/page"
 import { embeddingsModel } from "@/lib/embeddingModel"
+import { useFAQSource } from "@/hooks/useSource"
 
 const formSchema = z.object({
     faqs: z.array(z.object({

@@ -16,14 +16,7 @@ import { Button } from '@/components/ui/button'
 import CreateFAQSource from '@/components/ui/CreateFAQSource'
 import { getFAQs } from '@/lib/actions/faqs.actions'
 import { Separator } from '@/components/ui/separator'
-
-const faqSourceContext = createContext<{ refetch: () => void } | undefined>(undefined)
-
-export const useFAQSource = () => {
-    const context = useContext(faqSourceContext)
-    if (!context) throw new Error('useFAQSource must be used within TextSourceProvider')
-    return context
-}
+import { faqSourceContext } from '@/hooks/useSource'
 
 const FAQs = () => {
     const [faqs, setFaqs] = useState<FAQ[]>()

@@ -15,14 +15,7 @@ import { Box, Ellipsis } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import CreateProductSource from '@/components/CreateProductSource'
 import { getProducts } from '@/lib/actions/products.actions'
-
-const productsSourceContext = createContext<{ refetch: () => void } | undefined>(undefined)
-
-export const useProductSource = () => {
-    const context = useContext(productsSourceContext)
-    if (!context) throw new Error('useProductSource must be used within ProductSourceProvider')
-    return context
-}
+import { productsSourceContext } from '@/hooks/useSource'
 
 const Products = () => {
     const [products, setProducts] = useState<ProductType[]>()

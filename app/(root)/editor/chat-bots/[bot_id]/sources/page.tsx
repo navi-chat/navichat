@@ -16,14 +16,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Ellipsis, TextIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-
-const textSourceContext = createContext<{ refetch: () => void } | undefined>(undefined)
-
-export const useTextSource = () => {
-    const context = useContext(textSourceContext)
-    if (!context) throw new Error('useTextSource must be used within TextSourceProvider')
-    return context
-}
+import { textSourceContext } from '@/hooks/useSource'
 
 const Text = () => {
     const [texts, setTexts] = useState<TextType[]>()

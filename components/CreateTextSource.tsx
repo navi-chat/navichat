@@ -19,10 +19,10 @@ import { Textarea } from './ui/textarea'
 import { useParams } from 'next/navigation'
 import { createText } from '@/lib/actions/texts.actions'
 import { toast } from 'sonner'
-import { useTextSource } from '@/app/(root)/editor/chat-bots/[bot_id]/sources/page'
 import { Loader } from 'lucide-react'
 import { useSources } from '@/app/(root)/editor/chat-bots/[bot_id]/sources/layout'
 import { embeddingsModel } from '@/lib/embeddingModel'
+import { useTextSource } from '@/hooks/useSource'
 
 
 const formSchema = z.object({

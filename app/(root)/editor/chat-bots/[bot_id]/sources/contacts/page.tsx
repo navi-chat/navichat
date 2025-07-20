@@ -16,14 +16,7 @@ import { ContactRound, Ellipsis } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import CreateContactSource from '@/components/CreateContactSource'
 import { getContacts } from '@/lib/actions/contacts.actions'
-
-const contactsSourceContext = createContext<{ refetch: () => void } | undefined>(undefined)
-
-export const useContactSource = () => {
-    const context = useContext(contactsSourceContext)
-    if (!context) throw new Error('useContactSource must be used within ContactSourceProvider')
-    return context
-}
+import { contactsSourceContext } from '@/hooks/useSource'
 
 const Contacts = () => {
     const [contacts, setContacts] = useState<ContactType[]>()

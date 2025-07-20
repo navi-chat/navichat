@@ -20,9 +20,9 @@ import { toast } from 'sonner'
 import { Loader } from 'lucide-react'
 import { useSources } from '@/app/(root)/editor/chat-bots/[bot_id]/sources/layout'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
-import { useContactSource } from '@/app/(root)/editor/chat-bots/[bot_id]/sources/contacts/page'
 import { createContact } from '@/lib/actions/contacts.actions'
 import { embeddingsModel } from '@/lib/embeddingModel'
+import { useContactSource } from '@/hooks/useSource'
 
 export const contact_types = [
     {
