@@ -130,8 +130,8 @@ const Root = () => {
 
   return (
     <>
-      <script src={`${process.env.NEXT_PUBLIC_SERVER_URL}/api/bot?bot_id=f0f789db-7893-49a9-9320-f33a4e458b2b`} type="text/javascript" async />
-      {/* <Header /> */}
+      <script src="https://navichat.vercel.app/api/bot?bot_id=854f6623-93bc-4790-9270-7e197c3af763" type="text/javascript" async />
+      
       <div className='w-1/2 justify-between h-16 bg-foreground/80 backdrop-blur-3xl border fixed rounded-full top-5 ml-[50%] translate-x-[-50%] flex px-2 items-center'>
         <div className='flex items-center gap-1 bg-background h-12 rounded-full px-4'>
           <Image src={"/icon.png"} alt='logo' height={128} width={128} className='size-9' />
